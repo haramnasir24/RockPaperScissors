@@ -46,36 +46,76 @@ let isScissors = (choice) => {
 // play game
 
 let playGame = (playerSelection, computerSelection) => {
-    let winner
+    let userScore = 0
+    let computerScore = 0
     // compare the choices
+
     if (isPaper(playerSelection)) {
-        if (isScissors(computerSelection))
-            winner = "You lose, scissors beat paper."
-        else if (isRock(computerSelection))
-            winner = "You win, paper beats rock."
+        if (isScissors(computerSelection)) {
+            console.log("Scissors beat paper.")
+            computerScore++
+        }
+
+        else if (isRock(computerSelection)) {
+            console.log("Paper beats rock.")
+            userScore++
+        }
+
         else
-            winner = "It's a draw."
+            console.log("It's a draw.")
     }
+
     else if (isRock(playerSelection)) {
-        if (isScissors(computerSelection))
-            winner = "You win, rock beats scissors."
-        else if (isPaper(computerSelection))
-            winner = "You lose, paper beats rock."
+        if (isScissors(computerSelection)) {
+            console.log("Rock beats scissors.")
+            userScore++
+        }
+
+        else if (isPaper(computerSelection)) {
+            console.log("Paper beats rock.")
+            computerScore++
+        }
+
         else
-            winner = "It's a draw."
+            console.log("It's a draw.")
     }
+    
     // scissors
     else {
-        if (isPaper(computerSelection))
-            winner = "You win, scissors beats paper."
-        else if (isRock(computerSelection))
-            winner = "You lose, rock beats scissors."
+        if (isPaper(computerSelection)) {
+            console.log("Scissors beats paper.")
+            userScore++
+        }
+
+        else if (isRock(computerSelection)) {
+            console.log("Rock beats scissors.")
+            computerScore++
+        }
+
         else
-            winner = "It's a draw."
+            console.log("It's a draw.")
     }
-    return winner
+    return { userScore, computerScore }
 }
 
-console.log(playGame(getUserChoice(), getComputerChoice()))
+// 5 round game that keeps score
+let game = () => {
+    let user = 0
+    let computer = 0
+    for (let i = 1; i <= 5; i++) {
+        let scores = playGame(getUserChoice(), getComputerChoice())
+        user += scores.userScore
+        computer += scores.computerScore
+    }
 
+    if (user > computer)
+        alert("You won!")
+    else if (computer > user)
+        alert("You lost!")
+    else
+        alert("DRAW!")
 
+    return { user, computer }
+}
+
+console.log(game())
