@@ -79,7 +79,7 @@ let playGame = (playerSelection, computerSelection) => {
         else
             console.log("It's a draw.")
     }
-    
+
     // scissors
     else {
         if (isPaper(computerSelection)) {
@@ -115,6 +115,7 @@ let game = () => {
     else
         alert("DRAW!")
 
+    // an object
     return { user, computer }
 }
 
